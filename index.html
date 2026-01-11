@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Fishing</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="game">
+
+  <!-- /////////// -->
+  <!-- Fishing rod -->
+  <!-- /////////// -->
+
+  <div class="fishing-rod">
+    <img class="fill-container" src="game-fishing-rod.svg" alt="">
+    <canvas class="reel-line-tension" data-element="reel-line-tension"></canvas>
+    <div class="reel-handle">
+      <img src="game-reel-handle.svg" alt="">
+    </div>
+    <div class="reel-line"></div>
+  </div>
+
+  <!-- ///////// -->
+  <!-- Game body -->
+  <!-- ///////// -->
+
+  <div class="game-body">
+    <img class="fill-container" src="game-game-body-bg.svg" alt="">
+    <canvas class="bubbles" data-element="bubbles"></canvas>
+    <canvas class="seaweed" data-element="seaweed"></canvas>
+    <img class="seafloor fill-container" src="game-sea-floor.svg" alt="">
+    <div class="fish">
+      <img src="game-fish.svg" alt="">
+    </div>
+    <div class="indicator">
+      <img src="game-indicator.svg" alt="">
+    </div>
+    <img class="glass fill-container" src="game-glass.svg" alt="">
+  </div>
+
+  <!-- //////////// -->
+  <!-- Progress bar -->
+  <!-- //////////// -->
+
+  <div class="progress-bar">
+    <img class="fill-container" src="game-progress-bar-bg.svg" alt="">
+    <div class="progress-gradient-wrapper">
+      <img src="game-progress-gradient.svg" class="progress-gradient" alt="">
+    </div>
+  </div>
+
+</div>
+<!-- .game -->
+
+<!-- /////// -->
+<!-- Success -->
+<!-- /////// -->
+
+<div class="success">
+  <img src="game-nice-catch.png" alt="" class="nice-catch">
+  <img src="game-perfect.png" alt="" class="perfect">
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
