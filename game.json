@@ -2,6 +2,28 @@
   "$schema": "https://raw.githubusercontent.com/pewplay/pewplay/main/schema/game.schema.json",
   "title": "Fishing Game",
   "description": "Cast your line and catch as many fish as you can.",
+  "about": "Fishing Game is a browser game where you press and release at the right moments to control the fishing indicator and catch fish.\n\nStart a round in your browser and use the controls below to play.",
+  "howToPlay": "Press and release at the right moments to control the fishing indicator and catch fish.",
+  "controls": [
+    {
+      "input": "Mouse / touch / keyboard",
+      "action": "Hold and release the indicator"
+    }
+  ],
+  "tips": [
+    "Use mouse / touch / keyboard to hold and release the indicator.",
+    "Try another round to practice the timing and strategy."
+  ],
+  "faq": [
+    {
+      "question": "How do I play Fishing Game?",
+      "answer": "Press and release at the right moments to control the fishing indicator and catch fish."
+    },
+    {
+      "question": "Can I play Fishing Game in a browser?",
+      "answer": "Yes. Open the game page and play without installing an app."
+    }
+  ],
   "category": "Casual",
   "tags": [
     "fishing",
@@ -9,6 +31,9 @@
     "arcade",
     "relax"
   ],
-  "author": "PewPlay",
-  "playMode": "SinglePlayer"
+  "playMode": "SinglePlayer",
+  "orientation": "any",
+  "cover": "cover.png",
+  "draft": true,
+  "author": "PewPlay"
 }
