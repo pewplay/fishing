@@ -1,8 +1,14 @@
 {
+  "$schema": "https://raw.githubusercontent.com/pewplay/pewplay/main/schema/game.schema.json",
   "title": "Fishing Game",
   "description": "Cast your line and catch as many fish as you can.",
-  "keywords": ["fishing", "casual", "arcade", "relax"],
   "category": "Casual",
+  "tags": [
+    "fishing",
+    "casual",
+    "arcade",
+    "relax"
+  ],
   "author": "PewPlay",
   "playMode": "SinglePlayer"
 }
