@@ -149,8 +149,7 @@
 
     detectGameEnd() {
       if (this.progress >= 100) {
-        // successTimeline().play();
-        successTimeline().invalidate().play(0);
+        playSuccess();
 
         gameOver = true;
       }
@@ -175,12 +174,13 @@
   // Mouse events
   // ------------
 
-  window.addEventListener('mousedown', indicatorActive);
-  window.addEventListener('mouseup', indicatorInactive);
+  // Pointer events cover mouse, touch and pen
+  window.addEventListener('pointerdown', indicatorActive);
+  window.addEventListener('pointerup', indicatorInactive);
+  window.addEventListener('pointercancel', indicatorInactive);
+  window.addEventListener('blur', indicatorInactive);
   window.addEventListener('keydown', indicatorActive);
   window.addEventListener('keyup', indicatorInactive);
-  window.addEventListener('touchstart', indicatorActive);
-  window.addEventListener('touchend', indicatorInactive);
 
   function indicatorActive() {
     if (!keyPressed) {
@@ -207,6 +207,9 @@
   successButton.addEventListener('click', resetGame);
 
   function resetGame() {
+    if (!gameOver) return;
+    successAnimations.forEach(animation => animation.cancel());
+    successAnimations = [];
     progressBar.reset();
     fish.resetPosition();
 
@@ -222,21 +225,32 @@
   // ----------------
   // Success timeline
   // ----------------
+  // (Web Animations API, same timing and easing as the original GSAP timeline)
 
-  function successTimeline() {
-    TweenMax.set(".success", { display: 'flex' });
-    TweenMax.set(".nice-catch", { y: 50 });
-    TweenMax.set(".perfect", { perspective: 800 });
-    TweenMax.set(".perfect", { transformStyle: "preserve-3d" });
-    TweenMax.set(".perfect", { rotationX: -90 });
+  let successAnimations = [];
+  const power3Out = 'cubic-bezier(0.215, 0.61, 0.355, 1)';
+  const power1Out = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
 
-    const tl = new TimelineMax({ paused: true }).
-    to('.game', 0.2, { opacity: 0 }).
-    to('.success', 0.5, { ease: Power3.easeOut, opacity: 1 }, 'ending').
-    to('.nice-catch', 0.5, { ease: Power3.easeOut, y: 0 }, 'ending').
-    to('.perfect', 3, { ease: Elastic.easeOut.config(1, 0.3), rotationX: 0 }, '+=0.2');
+  // Elastic.easeOut.config(1, 0.3) sampled into keyframes
+  function elasticFrames(from, steps = 60) {
+    const period = 0.3;
+    const frames = [];
+    for (let i = 0; i <= steps; i++) {
+      const t = i / steps;
+      const e = t === 1 ? 1 : Math.pow(2, -10 * t) * Math.sin((t - period / 4) * (2 * Math.PI) / period) + 1;
+      frames.push({ transform: `rotateX(${from * (1 - e)}deg)` });
+    }
+    return frames;
+  }
 
-    return tl;
+  function playSuccess() {
+    successButton.style.display = 'flex';
+    successAnimations = [
+      game.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: power1Out, fill: 'forwards' }),
+      successButton.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 500, delay: 200, easing: power3Out, fill: 'both' }),
+      niceCatch.animate([{ transform: 'translateY(50px)' }, { transform: 'translateY(0)' }], { duration: 500, delay: 200, easing: power3Out, fill: 'both' }),
+      perfect.animate(elasticFrames(-90), { duration: 3000, delay: 900, fill: 'both' })
+    ];
   }
 
   // -------------

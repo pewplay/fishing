@@ -1,39 +1,62 @@
 {
   "$schema": "https://raw.githubusercontent.com/pewplay/pewplay/main/schema/game.schema.json",
   "title": "Fishing Game",
-  "description": "Cast your line and catch as many fish as you can.",
-  "about": "Fishing Game is a browser game where you press and release at the right moments to control the fishing indicator and catch fish.\n\nStart a round in your browser and use the controls below to play.",
-  "howToPlay": "Press and release at the right moments to control the fishing indicator and catch fish.",
+  "description": "Reel in a slippery fish by holding its bobbing catch zone right on top of it until the line meter fills up, in this free and relaxing browser game.",
+  "about": "Fishing Game turns the most tense moment of fishing into a quick, tactile mini-game. A fish darts up and down inside a tall glass tank next to your rod, and you control a light catch zone that rises while you hold and sinks as soon as you let go.\n\nKeep the fish inside the zone and the meter beside the tank fills up while the reel spins and the line pulls tight. Let it slip away and the meter drains, so every catch is a small battle of rhythm and patience. The zone has weight and bounces off the bottom, which makes gentle, well-timed presses much better than frantic tapping.\n\nWhen the meter is full you land the fish with a Nice Catch banner. It is a calm, satisfying game for short breaks, easy to learn with a single button.",
+  "howToPlay": "Hold down the mouse button, your finger or any key to lift the catch zone, and release it to let the zone sink. Keep the fish inside the zone to fill the meter on the right; while the fish is outside, the meter drains. Fill the meter to the top to land the fish, then click or tap the banner to fish again.",
   "controls": [
     {
-      "input": "Mouse / touch / keyboard",
-      "action": "Hold and release the indicator"
+      "input": "Hold Click / Touch",
+      "action": "Raise the catch zone"
+    },
+    {
+      "input": "Hold any key",
+      "action": "Raise the catch zone"
+    },
+    {
+      "input": "Release",
+      "action": "Let the catch zone sink"
+    },
+    {
+      "input": "Click / Tap banner",
+      "action": "Play again"
     }
   ],
   "tips": [
-    "Use mouse / touch / keyboard to hold and release the indicator.",
-    "Try another round to practice the timing and strategy."
+    "Use short, repeated presses to hover the zone instead of holding it down the whole time.",
+    "Let go a little before the zone reaches the fish, because it keeps drifting upward for a moment.",
+    "When the fish heads to the bottom, simply release and let the zone fall with it.",
+    "Stay calm when the meter drops: there is no time limit, so you can always win it back."
   ],
   "faq": [
     {
-      "question": "How do I play Fishing Game?",
-      "answer": "Press and release at the right moments to control the fishing indicator and catch fish."
+      "question": "Is Fishing Game free to play?",
+      "answer": "Yes. Fishing Game is completely free and runs in your browser with no download or sign-up."
     },
     {
-      "question": "Can I play Fishing Game in a browser?",
-      "answer": "Yes. Open the game page and play without installing an app."
+      "question": "Can I play Fishing Game on a phone or tablet?",
+      "answer": "Yes. Touch and hold anywhere on the screen to raise the catch zone and lift your finger to let it sink."
+    },
+    {
+      "question": "Can I lose a fish?",
+      "answer": "No. The meter can drain to empty, but the fish never escapes, so you can keep trying until you fill the meter and land it."
     }
   ],
   "category": "Casual",
   "tags": [
     "fishing",
-    "casual",
-    "arcade",
-    "relax"
+    "timing",
+    "one button",
+    "relaxing",
+    "skill"
   ],
+  "author": "PewPlay",
   "playMode": "SinglePlayer",
   "orientation": "any",
   "cover": "cover.png",
-  "draft": true,
-  "author": "PewPlay"
+  "screenshots": [
+    "screenshots/1.png",
+    "screenshots/2.png",
+    "screenshots/3.png"
+  ]
 }
