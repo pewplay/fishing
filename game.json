@@ -1,32 +1,33 @@
 {
   "$schema": "https://raw.githubusercontent.com/pewplay/pewplay/main/schema/game.schema.json",
   "title": "Fishing Game",
-  "description": "Reel in a slippery fish by holding its bobbing catch zone right on top of it until the line meter fills up, in this free and relaxing browser game.",
-  "about": "Fishing Game turns the most tense moment of fishing into a quick, tactile mini-game. A fish darts up and down inside a tall glass tank next to your rod, and you control a light catch zone that rises while you hold and sinks as soon as you let go.\n\nKeep the fish inside the zone and the meter beside the tank fills up while the reel spins and the line pulls tight. Let it slip away and the meter drains, so every catch is a small battle of rhythm and patience. The zone has weight and bounces off the bottom, which makes gentle, well-timed presses much better than frantic tapping.\n\nWhen the meter is full you land the fish with a Nice Catch banner. It is a calm, satisfying game for short breaks, easy to learn with a single button.",
-  "howToPlay": "Hold down the mouse button, your finger or any key to lift the catch zone, and release it to let the zone sink. Keep the fish inside the zone to fill the meter on the right; while the fish is outside, the meter drains. Fill the meter to the top to land the fish, then click or tap the banner to fish again.",
+  "description": "Keep the bobbing catch zone on a slippery fish until the line meter fills up in this free, relaxing one-button fishing game.",
+  "about": "Fishing Game turns the most tense moment of fishing into a quick, tactile mini-game. A fish darts up and down inside a tall glass tank next to your rod, and you control a light catch zone that rises while you hold and sinks as soon as you let go.\n\nKeep the fish inside the zone and the meter beside the tank fills up while the reel spins and the line pulls tight. Let it slip away and the meter drains, so every catch is a small battle of rhythm and patience. The zone has weight and bounces off the bottom, which makes gentle, well-timed presses much better than frantic tapping.\n\nFill the meter to land the fish with a Nice Catch banner. Land it without letting the meter sink much below where it started and you earn a Perfect too. Every round is timed, and the game remembers how many fish you have landed and your fastest catch, so there is always a record to beat.",
+  "howToPlay": "Hold down the mouse button, touch and hold anywhere on the screen, or hold any key to lift the catch zone, and release to let it sink. The round and its timer start with your first press. Keep the fish inside the zone to fill the meter on the right; while the fish is outside, the meter drains. Fill the meter to the top to land the fish, then press Fish again, tap the banner or press Enter for the next round.",
   "controls": [
     {
       "input": "Hold Click / Touch",
-      "action": "Raise the catch zone"
+      "action": "Lift the catch zone"
     },
     {
-      "input": "Hold any key",
-      "action": "Raise the catch zone"
+      "input": "Hold any key (e.g. Space)",
+      "action": "Lift the catch zone"
     },
     {
       "input": "Release",
       "action": "Let the catch zone sink"
     },
     {
-      "input": "Click / Tap banner",
-      "action": "Play again"
+      "input": "Fish again / Enter",
+      "action": "Start the next round"
     }
   ],
   "tips": [
     "Use short, repeated presses to hover the zone instead of holding it down the whole time.",
     "Let go a little before the zone reaches the fish, because it keeps drifting upward for a moment.",
     "When the fish heads to the bottom, simply release and let the zone fall with it.",
-    "Stay calm when the meter drops: there is no time limit, so you can always win it back."
+    "For a Perfect, grab the fish quickly at the start: the meter must not drop far below its starting level.",
+    "There is no time limit, so if the meter drains you can always win it back; only your best time suffers."
   ],
   "faq": [
     {
@@ -35,11 +36,19 @@
     },
     {
       "question": "Can I play Fishing Game on a phone or tablet?",
-      "answer": "Yes. Touch and hold anywhere on the screen to raise the catch zone and lift your finger to let it sink."
+      "answer": "Yes. Touch and hold anywhere on the screen to lift the catch zone and lift your finger to let it sink. The scene scales to fill the screen in portrait and landscape."
     },
     {
       "question": "Can I lose a fish?",
       "answer": "No. The meter can drain to empty, but the fish never escapes, so you can keep trying until you fill the meter and land it."
+    },
+    {
+      "question": "How do I get a Perfect?",
+      "answer": "Land the fish without letting the meter fall much below the level it starts at. The Nice Catch banner then shows an extra Perfect sign."
+    },
+    {
+      "question": "Are my records saved?",
+      "answer": "Yes. The number of fish you have landed and your fastest catch time are saved in your browser on this device."
     }
   ],
   "category": "Casual",

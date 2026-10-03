@@ -2,36 +2,191 @@ html {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*, *::before, *::after {
   box-sizing: inherit;
-  user-select: none;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
   user-select: none;
+  -webkit-touch-callout: none;
 }
 
 html,
 body {
+  margin: 0;
+  width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 body {
-  margin: 0;
-  overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
   touch-action: none;
+  overscroll-behavior: none;
   -webkit-tap-highlight-color: transparent;
-  background: radial-gradient(ellipse at center, #88c4c2 0%,#56838f 80%);
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  color: #18343d;
+  background: #6fa3a6;
+  background: radial-gradient(ellipse at center, #88c4c2 0%, #56838f 80%);
+  cursor: default;
+}
+
+img {
+  -webkit-user-drag: none;
+}
+
+/* ------ */
+/* Layout */
+/* ------ */
+
+.app {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  padding: max(10px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  gap: 8px;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.title {
+  display: none;
+  margin: 0 0 14px;
+  font-size: clamp(20px, 3.2vw, 34px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  text-shadow: 0 2px 0 rgba(24, 52, 61, 0.35);
+  text-align: center;
+}
+
+.stats {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 460px;
+}
+
+.stat {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 12px;
+  background: rgba(24, 52, 61, 0.78);
+  color: #fff;
+  min-width: 0;
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9fd6d9;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+.hint {
+  margin: 0;
+  max-width: 420px;
+  font-size: 15px;
+  line-height: 1.35;
+  text-align: center;
+  color: #10303a;
+  transition: opacity 0.4s;
+}
+
+.hint-touch { display: none; }
+
+@media (hover: none) and (pointer: coarse) {
+  .hint-touch { display: inline; }
+  .hint-mouse { display: none; }
+}
+
+.is-ready .hint {
+  animation: pulse 1.6s ease-in-out infinite;
+  font-weight: 700;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.stage-wrap {
+  position: relative;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
+.stage {
+  position: relative;
+  flex: none;
+}
+
+/* Wide screens: stats on the left, the scene in the middle, the hint on the right */
+@media (min-aspect-ratio: 1/1) {
+  .app {
+    grid-template-columns: minmax(0, 1fr) minmax(120px, 36vw) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .title { display: block; }
+
+  .stats {
+    flex-direction: column;
+    max-width: 210px;
+  }
+
+  .stat { padding: 8px 10px; }
+
+  .stat-value { font-size: clamp(22px, 2.6vw, 34px); }
+
+  .panel-hint .hint {
+    font-size: clamp(14px, 1.6vw, 19px);
+    max-width: 240px;
+  }
+}
+
+@media (min-aspect-ratio: 1/1) and (max-height: 430px) {
+  .title { margin-bottom: 8px; font-size: 20px; }
+  .stats { gap: 6px; }
+  .stat { padding: 4px 8px; }
+  .stat-value { font-size: 20px; }
+}
+
+/* ---------------------------------------------------------- */
+/* The scene (original pixel sizes, scaled as a whole by JS)  */
+/* ---------------------------------------------------------- */
+
 .game {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 108px;
+  height: 352px;
   display: flex;
   align-items: center;
-  opacity: 1;
+  transform-origin: 0 0;
 }
 
 .fill-container {
@@ -42,11 +197,10 @@ body {
   height: 100%;
 }
 
-/* ----------- */
 /* Fishing rod */
-/* ----------- */
 
 .fishing-rod {
+  flex: none;
   width: 46px;
   height: 352px;
   position: relative;
@@ -63,17 +217,13 @@ body {
 }
 
 .reel-handle img {
-  animation-name: rotate;
-  animation-iteration-count: infinite;
-  animation-duration: 0.35s;
-  animation-timing-function: linear;
+  animation: rotate 0.35s linear infinite paused;
   transform-origin: 12px 2.5px;
-  animation-play-state: paused;
 }
 
 @keyframes rotate {
-  0% {transform: rotate(0deg)}
-  100% {transform: rotate(360deg)}
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .indicator-active .reel-handle img {
@@ -88,11 +238,7 @@ body {
   left: 4px;
   background: repeating-linear-gradient(100deg, #18343d 0 1.5px, transparent 1.5px 7px);
   z-index: 5;
-  animation-name: reel;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  animation-play-state: paused;
+  animation: reel 1s linear infinite paused;
   opacity: 0.3;
 }
 
@@ -101,8 +247,8 @@ body {
 }
 
 @keyframes reel {
-  0% {background-position: 0;}
-  100% {background-position: 140px}
+  0% { background-position: 0; }
+  100% { background-position: 140px; }
 }
 
 .reel-line-tension {
@@ -111,22 +257,23 @@ body {
   position: absolute;
   bottom: 26.8%;
   left: 29%;
-  /* background: red;
-  opacity: 0.5; */
 }
 
-/* --------- */
-/* Game body */
-/* --------- */
+/* Tank */
 
 .game-body {
+  flex: none;
   width: 36px;
   height: 350px;
   position: relative;
+  transition: filter 0.2s;
+}
+
+.collision .game-body {
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.75));
 }
 
 .seafloor {
-  position: relative;
   z-index: 5;
 }
 
@@ -145,8 +292,6 @@ body {
   position: absolute;
   bottom: 4%;
   left: 2.7%;
-  /* background: red;
-  opacity: 0.5; */
 }
 
 .fish {
@@ -156,7 +301,13 @@ body {
   top: calc(100% - 17px);
   left: 18%;
   opacity: 0.8;
-  will-change: top;
+  will-change: transform;
+}
+
+.fish img,
+.indicator img {
+  display: block;
+  width: 100%;
 }
 
 .indicator {
@@ -167,17 +318,17 @@ body {
   left: 3%;
   opacity: 0.8;
   z-index: 30;
+  will-change: transform;
 }
 
 .glass {
   z-index: 20;
 }
 
-/* ------------ */
-/* Progress bar */
-/* ------------ */
+/* Meter */
 
 .progress-bar {
+  flex: none;
   width: 16px;
   height: 334px;
   position: relative;
@@ -189,10 +340,9 @@ body {
   bottom: 1px;
   left: 0;
   width: 15px;
-  height: 100%;
+  height: 50%;
   overflow: hidden;
   border-top-right-radius: 4px;
-  will-change: height;
 }
 
 .progress-gradient {
@@ -209,18 +359,21 @@ body {
 /* ------- */
 
 .success {
-  width: 200px;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
+  width: min(86vw, 62vh, 420px);
   transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
+  display: none;
   flex-direction: column;
+  align-items: center;
   z-index: 100;
   opacity: 0;
-  display: none;
   cursor: pointer;
+}
+
+.success.is-visible {
+  display: flex;
 }
 
 .nice-catch {
@@ -231,18 +384,51 @@ body {
 
 .perfect {
   width: 46.743295%;
-  margin-top: -4px;
+  margin-top: -2%;
   transform-origin: top;
   position: relative;
   z-index: 10;
 }
-/* Scale the small game up on taller screens (layout only, game logic uses unscaled px) */
-@media (min-height: 560px) and (min-width: 300px) {
-  .game { transform: scale(1.4); }
-  .success { transform: translate(-50%, -50%) scale(1.4); }
+
+.success.no-perfect .perfect {
+  display: none;
 }
 
-@media (min-height: 760px) and (min-width: 360px) {
-  .game { transform: scale(1.8); }
-  .success { transform: translate(-50%, -50%) scale(1.8); }
+.success-text {
+  margin: 14px 0 0;
+  font-size: clamp(17px, 2.6vh, 24px);
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 0 rgba(24, 52, 61, 0.45);
+}
+
+.success-text .new-best {
+  display: block;
+  color: #ffd166;
+}
+
+.again {
+  margin-top: 14px;
+  min-height: 48px;
+  min-width: 170px;
+  padding: 10px 26px;
+  border: 0;
+  border-radius: 999px;
+  background: #18343d;
+  color: #fff;
+  font: inherit;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+  touch-action: manipulation;
+}
+
+.again:hover { background: #224a56; }
+
+.again:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
 }
